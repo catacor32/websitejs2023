@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        const body = document.querySelector('body');
+        const div = document.createElement('div');
+        div.setAttribute("class","demo");
+        div.id = 'iddemo';
+        // div.className = 'democlass';
+        div.textContent = "div is a demo";
+        const text = document.createTextNode("div is a demo");
+        div.appendChild(text);
+        body.appendChild(div);
+    </script>
+
+</body>
+</html>

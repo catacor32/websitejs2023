@@ -10,6 +10,23 @@ var carousel = new bootstrap.Carousel(myCarousel, {
 // carousel.on('slide.bs.carousel', function () {
 //   alert(1);
 // })
+const scrollBtn = document.querySelector(".gototop");
+        const btnVisibility = () => {
+    if (window.scrollY > 400) {
+        scrollBtn.style.visibility = "visible";
+    } else {
+        scrollBtn.style.visibility = "hidden";
+    }
+};
+document.addEventListener("scroll", () => {
+    btnVisibility();
+});
+scrollBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
 
 
 var id;
@@ -35,7 +52,7 @@ $("#modalForm").on('show.bs.modal', function(event) {
   
 document.addEventListener("DOMContentLoaded", function(){
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 200) {
+        if (window.scrollY > 150) {
           document.getElementById('navbar_top').classList.add('fixed-top');
           // add padding top to show content behind navbar
           navbar_height = document.querySelector('.navbar').offsetHeight;
