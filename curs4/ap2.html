@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li{
+            list-style:none;
+        }
+        .lds-dual-ring.hidden {
+            display: none;
+        }
+
+        .lds-dual-ring {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+        }
+
+        .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 64px;
+            height: 64px;
+            margin: 5% auto;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+
+        @keyframes lds-dual-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, .8);
+            z-index: 999;
+            opacity: 1;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <h2>Top 100 cei mai bogati oameni</h2>
+    <button id="btn">Get data</button>
+    <div id="div"></div>
+    <div id="loader" class="lds-dual-ring hidden overlay"></div>
+
+    <script>
+        console.clear();
+        // https://jsonplaceholder.typicode.com/guide/
+        // https://jsonplaceholder.typicode.com/users
+        // fake api data 'https://jsonplaceholder.typicode.com/posts/'
+        const btn = document.getElementById('btn');
+        const div = document.getElementById('div');
+
+        btn.addEventListener('click', getData);
+        function getData() {
+            document.getElementById('loader').classList.remove('hidden');
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://forbes400.onrender.com/api/forbes400?limit=', true);
+            xhr.onload = function () {
+                if (this.status == 200) {
+                    const data = JSON.parse(this.responseText)
+                    const sliceData = data.slice(0,100)
+                    // console.table(data);
+                    sliceData.forEach(item => {
+                        console.log(item);
+                        div.innerHTML += 
+                        `<li>${item.rank}. Nume: ${item.person.name}, Industries: ${item.industries}</li>`
+                    })
+                    document.getElementById('loader').classList.add('hidden');
+
+                }
+            }
+            xhr.onerror = function () {
+                const error = `404: Not Found`
+                console.log(error);
+                p.innerHTML = error;
+            }
+            xhr.send();
+        }
+    </script>
+
+</body>
+</html>
