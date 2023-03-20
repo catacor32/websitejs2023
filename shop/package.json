@@ -25,6 +25,7 @@
         "imagemin-pngquant": "^9.0.2"
     },
     "dependencies": {
+        "bootstrap-icons": "^1.10.3",
         "node-sass": "^8.0.0",
         "sass": "^1.58.3"
     }
