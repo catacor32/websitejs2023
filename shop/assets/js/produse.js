@@ -7,7 +7,8 @@ console.log('apelez api')
 
 // Pas 1
 async function getProducts() {
-    let response = await fetch("https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline");
+    // let response = await fetch("https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline");
+    let response = await fetch("http://127.0.0.1:5500/shop/assets/js/makeup.json");
     let products = await response.json();
     return products;
 }
@@ -54,6 +55,7 @@ function onLoad() {
 
     }).finally(() => {
         console.log("Cererea s-a incheiat: cu succes sau fara succes.");
+        $.getScript("./assets/js/cart.js")
 
     });
 }
@@ -74,9 +76,10 @@ async function listProducts(products) {
                 </div>
             </a>
             <div class="card-body text-center">
-                <h4 class="card-title">${product.name} ${product.category}</h4>
+                <h4 class="card-title">${product.name}</h4>
                 <p class="text-muted">Starting from ${product.price}</p>
                 <a target= '_blank' class="btn btn-outline-primary btn-sm" href="${product.product_link}" data-abc="true">View Products</a>
+                <a href="#" data-id="${product.id} data-name=" ${product.name} " data-price="${product.price}" class="add-to-cart btn btn-success">Add to cart</a>
             </div>
         </div>
     </div>
